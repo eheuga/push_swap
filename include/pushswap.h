@@ -55,7 +55,7 @@ void push_min(t_node **stack_a, t_node **stack_b, int min);
 void little_sorter4(t_node **stack_a, t_node **stack_b);
 void little_sorter5(t_node **stack_a, t_node **stack_b);
 
-void push_chunks (t_node **stack_a, t_node **stack_b, int chunks_count, int chunks_size);
+void push_chunks (t_node **stack_a, t_node **stack_b);
 int find_max (t_node *stack_b);
 void push_max (t_node **stack_a, t_node **stack_b, int max);
 

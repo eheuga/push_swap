@@ -7,14 +7,11 @@ int main(int ac, char **av)
     t_node  *stack_a;
     t_node  *stack_b;
     int     args_nbr;
-    int     chunks_size;
-    int     chunks_count;
     int     max;
 
     stack_a = NULL;
     stack_b = NULL;
     args_nbr = 0;
-    chunks_size = 0;
     i = 1;
 
     if (ac == 1)
@@ -53,9 +50,7 @@ int main(int ac, char **av)
         little_sorter5(&stack_a, &stack_b);
     else if (args_nbr <= 100)
     {
-        chunks_size = args_nbr / 5;
-        chunks_count = args_nbr / chunks_size;
-        push_chunks(&stack_a, &stack_b, chunks_count, chunks_size);
+        push_chunks(&stack_a, &stack_b);
         while (stack_b)
         {
             max = find_max(stack_b);
@@ -64,9 +59,7 @@ int main(int ac, char **av)
     }
     else if (args_nbr <= 500)
     {
-        chunks_size = args_nbr / 13;
-        chunks_count = args_nbr / chunks_size + 1;
-        push_chunks(&stack_a, &stack_b, chunks_count, chunks_size);
+        push_chunks(&stack_a, &stack_b);
         while (stack_b)
         {
             max = find_max(stack_b);

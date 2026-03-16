@@ -1,4 +1,4 @@
-# Push Swap - Threshold Sort
+# Push Swap - K-Sort
 
 ## About
 This is the final implementation of the push_swap project.
