@@ -1,13 +1,11 @@
-# Push Swap - Threshold Sort
+# Push Swap - Chunk Sort
 
 ## About
-This is the final implementation of the push_swap project.
-After experimenting with a chunk-based approach (see `chunk_sort` branch),
-I moved to a threshold-based algorithm that passes the 42 benchmark.
+This is my first implementation of the push_swap project.
+I chose to implement a chunk-based sorting algorithm as a first approach
+before moving on to a more optimized solution (see `main` branch).
 
-## How it works
-
-### Operations
+## Operations
 
 | Operation | Description |
 |-----------|-------------|
@@ -23,26 +21,17 @@ I moved to a threshold-based algorithm that passes the 42 benchmark.
 | `rrb` | Reverse rotate B (last element becomes first) |
 | `rrr` | rra and rrb at the same time |
 
+## How it works
+
 ### Indexing
 Before sorting, all values are replaced by their rank (0 to N-1).
 This makes the algorithm work with any range of integers.
 
-### Phase 1 - Push to B with threshold
-Instead of fixed chunks, a threshold grows progressively.
-At each step, if the value at the top of A is within the current
-threshold window, it gets pushed to B.
-If the pushed value is below the current threshold, rb is applied
-to keep smaller values at the bottom of B.
-This ensures B is roughly ordered, making phase 2 cheaper.
-```c
-delta = size / 20 + 7
-threshold = 0
-while stack_a not empty:
-    if top_a <= delta + threshold → pb
-        if top_b <= threshold → rb
-        threshold++
-    else → ra
-```
+### Phase 1 - Push to B by chunks
+The indices are divided into chunks of equal size.
+For each chunk, `find_closest_in_chunk` finds the element of the current
+chunk that is closest to the top of the stack, whether from the top (ra)
+or from the bottom (rra). This avoids unnecessary rotations.
 
 ### Phase 2 - Push back to A
 Once all elements are in B, `push_max` brings them back to A
@@ -58,10 +47,20 @@ on which is closer.
 ## Performance
 | Input size | Operations | 42 limit |
 |------------|------------|----------|
-| 100 values | ~567 ops   | 700 (5pts) / 900 (4pts) |
-| 500 values | ~5174 ops  | 5500 (5pts) |
+| 100 values | ~720 ops   | 700 (5pts) / 900 (4pts) |
+| 500 values | ~7332 ops  | 5500 (5pts) |
+
+The 500 values benchmark does not reach the 5pts score.
+This is why I moved on to a threshold-based approach (see `main` branch).
+
+## Why I moved on
+The chunk sort has a structural limitation — fixed chunks don't adapt
+to the actual distribution of values in the stack.
+The threshold approach on `main` fixes this by dynamically adjusting
+which values get pushed at each step, reaching ~5174 ops on 500 values.
 
 ## What I learned
-- How a dynamic threshold outperforms fixed chunks
-- The importance of ordering B during the push phase
-- Optimization through adaptive window sizing
+- Linked list manipulation in C
+- Stack operations (push, rotate, reverse rotate)
+- Chunk-based sorting logic
+- Cost optimization with ra/rra using find_closest_in_chunk
