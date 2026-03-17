@@ -1,9 +1,6 @@
-<<<<<<< HEAD
+
 # Push Swap - K-sort
 =======
-# Push Swap - K-Sort
->>>>>>> aeec83c (push_swap 100%)
-
 ## About
 This is the final implementation of the push_swap project.
 After experimenting with a chunk-based approach (see `chunk_sort` branch),
