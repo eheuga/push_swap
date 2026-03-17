@@ -18,6 +18,8 @@ extern int op_count; // A SUPPRIMER -> toutes les ref (operations + main)!!!
 t_node  *new_node(int value);
 void    add_back(t_node **head, t_node *new);
 void    add_front(t_node **head, t_node *new);
+char **ft_split_args(char *str);
+
 
 // validation
 int     is_valid_number(char *str);

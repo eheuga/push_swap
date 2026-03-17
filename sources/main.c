@@ -8,14 +8,23 @@ int main(int ac, char **av)
     t_node  *stack_b;
     int     args_nbr;
     int     max;
-
+    
     stack_a = NULL;
     stack_b = NULL;
     args_nbr = 0;
     i = 1;
-
+    
     if (ac == 1)
-        return (0);
+    return (0);
+
+if (ac == 2)
+{
+    av = ft_split_args(av[1]);
+    ac = 1;
+    while (av[ac])
+        ac++;
+}
+
     while (i < ac)
     {
         if (!is_valid_number(av[i]))

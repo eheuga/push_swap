@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+# Push Swap - K-sort
+=======
 # Push Swap - K-Sort
+>>>>>>> aeec83c (push_swap 100%)
 
 ## About
 This is the final implementation of the push_swap project.
@@ -49,17 +53,12 @@ Once all elements are in B, `push_max` brings them back to A
 by always pushing the maximum value, using rb or rrb depending
 on which is closer.
 
-### Small cases
-- 2 values : sa
-- 3 values : hardcoded cases
-- 4 values : push min → sort 3 → pa
-- 5 values : push 2 mins → sort 3 → pa x2
 
 ## Performance
 | Input size | Operations | 42 limit |
 |------------|------------|----------|
-| 100 values | ~567 ops   | 700 (5pts) / 900 (4pts) |
-| 500 values | ~5174 ops  | 5500 (5pts) |
+| 100 values | ~570 ops   | 700 (5pts)|
+| 500 values | ~5150 ops  | 5500 (5pts) |
 
 ## What I learned
 - How a dynamic threshold outperforms fixed chunks

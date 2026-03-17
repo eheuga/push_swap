@@ -1,7 +1,7 @@
 NAME	= push_swap
 
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g
 
 SRC	= sources
 INCLUDE	= include
@@ -9,6 +9,7 @@ INCLUDE	= include
 SRCS	= $(SRC)/operations.c \
 		  $(SRC)/chek.c \
 		  $(SRC)/ft_atoi.c \
+		  $(SRC)/ft_split.c \
 		  $(SRC)/indexer.c \
 		  $(SRC)/is_sorted.c \
 		  $(SRC)/little_sorter.c \
