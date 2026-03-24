@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emheuga <emheuga@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,57 +10,60 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "pushswap.h"
 
-int	main(int ac, char **av)
-{
-	t_node	*stack_a;
-	t_node	*stack_b;
-	int		i;
-
-	stack_a = NULL;
-	stack_b = NULL;
-	i = 1;
-	if (ac == 1)
-		return (0);
-	if (ac == 2)
-	{
-		av = ft_split_args(av[1]);
-		ac = 1;
-		while (av[ac])
-			ac++;
-	}
-	checker(stack_a, stack_b, ac, av);
-	free_stack(stack_a);
-	write(1, "KO\n", 3);
-	return (0);
-}
-
-void	checker(t_node **stack_a, t_node **stack_b, int ac, char **av)
+int	is_valid_number(char *str)
 {
 	int	i;
 
+	i = 0;
+	if (str[i] == '-')
+		i++;
+	if (!str[i])
+		return (0);
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	is_number_dup(int ac, char **str)
+{
+	int	i;
+	int	j;
+
 	i = 1;
 	while (i < ac)
 	{
-		if (!is_valid_number(av[i]))
+		j = i + 1;
+		while (str[j])
 		{
-			write(2, "Error\n", 6);
-			return (1);
+			if (ft_atoi(str[i]) == ft_atoi(str[j]))
+			{
+				write(2, "Error\n", 6);
+				exit(1);
+			}
+			j++;
 		}
 		i++;
 	}
-	is_number_dup(ac, av);
-	while (i < ac)
+	return (1);
+}
+
+int	count_args(t_node *stack_a)
+{
+	int		i;
+	t_node	*current;
+
+	i = 1;
+	current = stack_a;
+	while (current->next != NULL)
 	{
-		add_back(&stack_a, new_node(ft_atoi(av[i])));
 		i++;
+		current = current->next;
 	}
-	do_op(&stack_a, &stack_b);
-	if (sorted_verif(stack_a) && !stack_b)
-	{
-		free_stack(stack_a);
-		write(1, "OK\n", 3);
-		return (0);
-	}
+	return (i);
 }

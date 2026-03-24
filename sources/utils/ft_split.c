@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emheuga <emheuga@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,57 +10,51 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include <stdlib.h>
 
-int	main(int ac, char **av)
+char	**ft_split_args(char *str)
 {
-	t_node	*stack_a;
-	t_node	*stack_b;
 	int		i;
+	int		j;
+	int		count;
+	char	**result;
+	int		start;
+	int		k;
 
-	stack_a = NULL;
-	stack_b = NULL;
-	i = 1;
-	if (ac == 1)
-		return (0);
-	if (ac == 2)
+	i = 0;
+	j = 0;
+	count = 0;
+	while (str[i])
 	{
-		av = ft_split_args(av[1]);
-		ac = 1;
-		while (av[ac])
-			ac++;
+		while (str[i] == ' ')
+			i++;
+		if (str[i])
+			count++;
+		while (str[i] && str[i] != ' ')
+			i++;
 	}
-	checker(stack_a, stack_b, ac, av);
-	free_stack(stack_a);
-	write(1, "KO\n", 3);
-	return (0);
-}
-
-void	checker(t_node **stack_a, t_node **stack_b, int ac, char **av)
-{
-	int	i;
-
-	i = 1;
-	while (i < ac)
+	result = malloc(sizeof(char *) * (count + 2));
+	if (!result)
+		return (NULL);
+	result[0] = NULL;
+	i = 0;
+	j = 1;
+	while (str[i])
 	{
-		if (!is_valid_number(av[i]))
-		{
-			write(2, "Error\n", 6);
-			return (1);
-		}
-		i++;
+		while (str[i] == ' ')
+			i++;
+		if (!str[i])
+			break ;
+		start = i;
+		while (str[i] && str[i] != ' ')
+			i++;
+		result[j] = malloc(sizeof(char) * (i - start + 1));
+		k = 0;
+		while (start < i)
+			result[j][k++] = str[start++];
+		result[j][k] = '\0';
+		j++;
 	}
-	is_number_dup(ac, av);
-	while (i < ac)
-	{
-		add_back(&stack_a, new_node(ft_atoi(av[i])));
-		i++;
-	}
-	do_op(&stack_a, &stack_b);
-	if (sorted_verif(stack_a) && !stack_b)
-	{
-		free_stack(stack_a);
-		write(1, "OK\n", 3);
-		return (0);
-	}
+	result[j] = NULL;
+	return (result);
 }
