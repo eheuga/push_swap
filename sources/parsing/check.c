@@ -6,7 +6,7 @@
 /*   By: emheuga <emheuga@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 13:46:38 by emheuga           #+#    #+#             */
-/*   Updated: 2026/03/24 16:05:38 by emheuga          ###   ########.fr       */
+/*   Updated: 2026/03/28 16:19:06 by emheuga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,21 @@
 
 int	is_valid_number(char *str)
 {
-	int	i;
+	long	nb;
+	int		i;
 
 	i = 0;
-	if (str[i] == '-')
+	nb = 0;
+	if (str[i] == '-' || str[i] == '+')
 		i++;
 	if (!str[i])
 		return (0);
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		nb = nb * 10 + (str[i] - '0');
+		if (nb > 2147483647 || nb < -2147483648)
 			return (0);
 		i++;
 	}
@@ -58,6 +63,8 @@ int	count_args(t_node *stack_a)
 	int		i;
 	t_node	*current;
 
+	if (!stack_a)
+		return (0);
 	i = 1;
 	current = stack_a;
 	while (current->next != NULL)

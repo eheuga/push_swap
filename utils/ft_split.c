@@ -6,23 +6,18 @@
 /*   By: emheuga <emheuga@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 13:46:38 by emheuga           #+#    #+#             */
-/*   Updated: 2026/03/24 16:05:38 by emheuga          ###   ########.fr       */
+/*   Updated: 2026/03/28 16:38:30 by emheuga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	**ft_split_args(char *str)
+static int	count_words(char *str)
 {
-	int		i;
-	int		j;
-	int		count;
-	char	**result;
-	int		start;
-	int		k;
+	int	i;
+	int	count;
 
 	i = 0;
-	j = 0;
 	count = 0;
 	while (str[i])
 	{
@@ -33,7 +28,32 @@ char	**ft_split_args(char *str)
 		while (str[i] && str[i] != ' ')
 			i++;
 	}
-	result = malloc(sizeof(char *) * (count + 2));
+	return (count);
+}
+
+static char	*extract_word(char *str, int start, int end)
+{
+	char	*word;
+	int		k;
+
+	word = malloc(sizeof(char) * (end - start + 1));
+	if (!word)
+		return (NULL);
+	k = 0;
+	while (start < end)
+		word[k++] = str[start++];
+	word[k] = '\0';
+	return (word);
+}
+
+char	**ft_split(char *str)
+{
+	char	**result;
+	int		i;
+	int		j;
+	int		start;
+
+	result = malloc(sizeof(char *) * (count_words(str) + 2));
 	if (!result)
 		return (NULL);
 	result[0] = NULL;
@@ -48,12 +68,7 @@ char	**ft_split_args(char *str)
 		start = i;
 		while (str[i] && str[i] != ' ')
 			i++;
-		result[j] = malloc(sizeof(char) * (i - start + 1));
-		k = 0;
-		while (start < i)
-			result[j][k++] = str[start++];
-		result[j][k] = '\0';
-		j++;
+		result[j++] = extract_word(str, start, i);
 	}
 	result[j] = NULL;
 	return (result);

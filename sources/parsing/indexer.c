@@ -6,42 +6,31 @@
 /*   By: emheuga <emheuga@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 13:46:38 by emheuga           #+#    #+#             */
-/*   Updated: 2026/03/24 16:05:38 by emheuga          ###   ########.fr       */
+/*   Updated: 2026/03/28 16:38:30 by emheuga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	*indexer(t_node **stack_a)
+static int	get_size(t_node *stack)
 {
-	int		size;
-	int		i;
-	int		j;
-	int		tmp;
-	int		*tab;
-	t_node	*current;
+	int	size;
 
 	size = 0;
-	i = 0;
-	j = 0;
-	tmp = 0;
-	current = NULL;
-	current = *stack_a;
-	while (current != NULL)
+	while (stack != NULL)
 	{
 		size++;
-		current = current->next;
+		stack = stack->next;
 	}
-	tab = malloc(sizeof(int) * size);
-	if (!tab)
-		return (0);
-	current = *stack_a;
-	while (current != NULL)
-	{
-		tab[i] = current->value;
-		i++;
-		current = current->next;
-	}
+	return (size);
+}
+
+static void	bubble_sort(int *tab, int size)
+{
+	int	i;
+	int	j;
+	int	tmp;
+
 	i = 0;
 	while (i < size - 1)
 	{
@@ -58,6 +47,28 @@ int	*indexer(t_node **stack_a)
 		}
 		i++;
 	}
+}
+
+int	*indexer(t_node **stack_a)
+{
+	int		size;
+	int		i;
+	int		*tab;
+	t_node	*current;
+
+	size = get_size(*stack_a);
+	tab = malloc(sizeof(int) * size);
+	if (!tab)
+		return (0);
+	current = *stack_a;
+	i = 0;
+	while (current != NULL)
+	{
+		tab[i] = current->value;
+		i++;
+		current = current->next;
+	}
+	bubble_sort(tab, size);
 	return (tab);
 }
 

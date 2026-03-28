@@ -6,7 +6,7 @@
 /*   By: emheuga <emheuga@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:05:03 by emheuga           #+#    #+#             */
-/*   Updated: 2026/03/24 16:05:38 by emheuga          ###   ########.fr       */
+/*   Updated: 2026/03/28 16:19:06 by emheuga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	swap_a(t_node **stack_a, int print)
 	t_node	*tmp2;
 	t_node	*tmp3;
 
+	if (!*stack_a || !(*stack_a)->next)
+		return ;
 	tmp1 = *stack_a;
 	tmp2 = (*stack_a)->next;
 	tmp3 = tmp2->next;
@@ -36,6 +38,8 @@ void	swap_b(t_node **stack_b, int print)
 	t_node	*tmp2;
 	t_node	*tmp3;
 
+	if (!*stack_b || !(*stack_b)->next)
+		return ;
 	tmp1 = *stack_b;
 	tmp2 = (*stack_b)->next;
 	tmp3 = tmp2->next;

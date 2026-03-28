@@ -1,10 +1,24 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: emheuga <emheuga@student.42angouleme.fr>   +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/03/28 16:39:45 by emheuga           #+#    #+#              #
+#    Updated: 2026/03/28 16:39:48 by emheuga          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
 NAME        = push_swap
 BONUS       = checker
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror
+CFLAGS      = -Wall -Wextra -Werror -g
 INCLUDE     = include
 SRC_DIR     = sources
 BONUS_DIR   = bonus
+UTILS_DIR   = utils
 
 SRCS = \
 $(SRC_DIR)/main.c \
@@ -13,15 +27,16 @@ $(SRC_DIR)/operations/reverse_rotate.c \
 $(SRC_DIR)/operations/rotate.c \
 $(SRC_DIR)/operations/swap.c \
 $(SRC_DIR)/parsing/check.c \
+$(SRC_DIR)/parsing/indexer.c \
 $(SRC_DIR)/parsing/is_sorted.c \
 $(SRC_DIR)/sorting/big_sorter.c \
 $(SRC_DIR)/sorting/little_sorter.c \
 $(SRC_DIR)/stack/add_to_stack.c \
 $(SRC_DIR)/stack/free_stack.c \
 $(SRC_DIR)/stack/new_node.c \
-$(SRC_DIR)/utils/ft_atoi.c \
-$(SRC_DIR)/utils/ft_split.c \
-$(SRC_DIR)/utils/indexer.c
+$(UTILS_DIR)/ft_atoi.c \
+$(UTILS_DIR)/ft_split.c \
+$(UTILS_DIR)/ft_strcmp.c
 
 BONUS_SRCS = \
 $(BONUS_DIR)/checker.c \
@@ -31,13 +46,14 @@ $(SRC_DIR)/operations/reverse_rotate.c \
 $(SRC_DIR)/operations/rotate.c \
 $(SRC_DIR)/operations/swap.c \
 $(SRC_DIR)/parsing/check.c \
+$(SRC_DIR)/parsing/indexer.c \
 $(SRC_DIR)/parsing/is_sorted.c \
 $(SRC_DIR)/stack/add_to_stack.c \
 $(SRC_DIR)/stack/free_stack.c \
 $(SRC_DIR)/stack/new_node.c \
-$(SRC_DIR)/utils/ft_atoi.c \
-$(SRC_DIR)/utils/ft_split.c \
-$(SRC_DIR)/utils/indexer.c
+$(UTILS_DIR)/ft_atoi.c \
+$(UTILS_DIR)/ft_split.c \
+$(UTILS_DIR)/ft_strcmp.c
 
 OBJS        = $(SRCS:.c=.o)
 BONUS_OBJS  = $(BONUS_SRCS:.c=.o)

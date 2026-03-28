@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_sorted.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emheuga <emheuga@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/24 13:46:38 by emheuga           #+#    #+#             */
-/*   Updated: 2026/03/28 16:19:06 by emheuga          ###   ########.fr       */
+/*   Created: 2026/03/28 16:16:47 by emheuga           #+#    #+#             */
+/*   Updated: 2026/03/28 16:38:30 by emheuga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
-
-int	sorted_verif(t_node *stack_a)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	t_node	*current;
+	int	i;
 
-	if (!stack_a)
-		return (1);
-	current = stack_a;
-	while (current->next != NULL)
-	{
-		if (current->value > current->next->value)
-		{
-			return (0);
-		}
-		current = current->next;
-	}
-	return (1);
+	if (!(*s1) || !(*s2))
+		return (0);
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

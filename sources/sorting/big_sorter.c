@@ -6,7 +6,7 @@
 /*   By: emheuga <emheuga@student.42angouleme.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 13:46:38 by emheuga           #+#    #+#             */
-/*   Updated: 2026/03/24 16:05:38 by emheuga          ###   ########.fr       */
+/*   Updated: 2026/03/28 16:19:06 by emheuga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	get_stack_size(t_node *stack)
 	return (size);
 }
 
-void	push_chunks(t_node **stack_a, t_node **stack_b)
+void	k_sort(t_node **stack_a, t_node **stack_b)
 {
 	int	size;
 	int	delta;
@@ -85,13 +85,8 @@ void	push_max(t_node **stack_a, t_node **stack_b, int max)
 	int		stack_size;
 	t_node	*current;
 
-	stack_size = 0;
+	stack_size = get_stack_size(*stack_b);
 	current = *stack_b;
-	while (current != NULL)
-	{
-		stack_size++;
-		current = current->next;
-	}
 	pos = find_position(*stack_b, max);
 	if (pos < stack_size / 2)
 	{
